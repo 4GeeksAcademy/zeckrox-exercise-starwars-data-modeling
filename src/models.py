@@ -41,8 +41,8 @@ class Characters(Base):
     birth_year = Column(String(30), nullable=False)
 
     
-class FavoriteCharacter(Base):
-    __tablename__ = 'favorite_character'
+class Favorite(Base):
+    __tablename__ = 'favorites'
 
     id = Column(Integer, primary_key=True)
     user_id = Column(Integer, ForeignKey("user.id"), nullable=False)
@@ -50,14 +50,9 @@ class FavoriteCharacter(Base):
     planet_id = Column(Integer, ForeignKey("planets.id"), nullable=False)
     planet = relationship(Planets)
 
-class FavoritePlanet(Base):
-    __tablename__ = 'favorite_planet'
-
-    id = Column(Integer, primary_key=True)
-    user_id = Column(Integer, ForeignKey("user.id"), nullable=False)
-
     character_id = Column(Integer, ForeignKey("characters.id"), nullable=False)
     character = relationship(Characters)
+
 
 ## Draw from SQLAlchemy base
 render_er(Base, 'diagram.png')
